@@ -149,6 +149,7 @@ def run_mujoco(policy, cfg):
 
             target_q = action * cfg.control.action_scale
 
+            viewer.render()
 
         target_dq = np.zeros((cfg.env.num_actions), dtype=np.double)
         # Generate PD control
@@ -158,7 +159,6 @@ def run_mujoco(policy, cfg):
         data.ctrl = tau
 
         mujoco.mj_step(model, data)
-        viewer.render()
         count_lowlevel += 1
 
     viewer.close()
